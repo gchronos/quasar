@@ -1,0 +1,16 @@
+<div class="AudioItem">
+    <div class="AudioItem-checkbox"><mat-checkbox (change)="onToggleSelected($event)" [checked]="true"></mat-checkbox></div>
+    <div class="AudioItem-audio"></div>
+</div>
+<div #audiosEl>
+    <div *ngFor="let item of audio" class="AudioItem">
+        <div class="AudioItem-checkbox"><mat-checkbox [(ngModel)]="item.isSelected"></mat-checkbox></div>
+        <div class="AudioItem-audio"><mat-basic-audio-player [audioUrl]="item.src" [displayVolumeControls]="false"></mat-basic-audio-player></div>
+    </div>
+</div>
+
+<button (click)="onPlaySelected()" mat-button>play</button>
+<button (click)="onPauseSelected()" mat-button>pause</button>
+<button (click)="onStopSelected()" mat-button>stop</button>
+
+

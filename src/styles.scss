@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Override third party css
+@import "scss/override/material";
+
+// my ap styles
+@import "scss/main";

@@ -1,0 +1,23 @@
+.AudioItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+
+
+    &-checkbox {
+        ::ng-deep.mat-checkbox-inner-container {
+            height: 25px;
+            width: 25px;
+        }
+    }
+
+    &-audio {
+        flex: auto;
+        padding: 0 0 0 10px;
+
+        ::ng-deep.ngx-basic-audio-player-button-handler {
+            display: none;
+        }
+    }
+}
