@@ -10,6 +10,7 @@ import { FooterComponent } from '@quasar/components/footer/footer.component';
 import { HomePageComponent } from '@quasar/pages/home/home-page.component';
 import { MenuComponent } from '@quasar/components/menu/menu.component';
 import { AppRoutingModule } from '@quasar/app-routing.module';
+import { StoreModule } from '@quasar/store/store.module';
 import { AppComponent } from '@quasar/app.component';
 
 
@@ -24,6 +25,7 @@ import { AppComponent } from '@quasar/app.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        StoreModule,
         MatMenuModule,
         MatButtonModule,
         NgxAudioPlayerModule,
