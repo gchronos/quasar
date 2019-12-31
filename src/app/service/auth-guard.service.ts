@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngxs/store';
 
-import { UserService } from './user.service';
+import {UserService} from '@quasar/store/user/user.service';
+
 
 @Injectable({
     providedIn: 'root'
@@ -9,20 +10,11 @@ import { UserService } from './user.service';
 export class AuthGuardService {
 
     constructor(
-        private userService: UserService,
-        private storage: Storage,
-        private router: Router
+        private store: Store
     ) {
     }
 
-    async canActivate() {
-        // const user = await this.storage.get('user');
-        const user = {};
-        if (!user) {
-            this.router.navigate(['login']);
-            return false;
-        } else {
-            return true;
-        }
+    canActivate() {
+        return this.store.selectSnapshot(UserService.isAuthenticated);
     }
 }

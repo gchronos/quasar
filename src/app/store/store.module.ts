@@ -17,7 +17,7 @@ import { quasarState } from '@quasar/store/index';
             [...quasarState],
             { developmentMode: environment.development }),
         NgxsStoragePluginModule.forRoot({
-            key: [] // TODO: add objects that need to store locally
+            key: ['user'] // TODO: add objects that need to store locally
         }),
         NgxsDispatchPluginModule.forRoot(),
         NgxsResetPluginModule.forRoot(),

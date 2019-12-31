@@ -1,10 +1,13 @@
-import { LoginRes } from './user.model';
+import { UserData } from './user.model';
 
 export class Login {
-    static readonly type = '[Login]: action';
+    static readonly type = '[Auth] Login';
 
-    constructor(public payload: LoginRes) {}
+    constructor(public payload: UserData) {}
 }
 
+export class Logout {
+    static readonly type = '[Auth] Logout';
+}
 
 

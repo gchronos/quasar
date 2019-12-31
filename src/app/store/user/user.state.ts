@@ -1,25 +1,40 @@
-import { Action, State, StateContext } from '@ngxs/store';
+import {Action, State, StateContext} from '@ngxs/store';
 
-import { Login } from '@quasar/store/user/user.actions';
+import {Login, Logout} from '@quasar/store/user/user.actions';
+import {UserStateData} from '@quasar/store/user/user.model';
 
 
-
-@State<any>({
+@State<UserStateData>({
     name: 'user',
     defaults: {
+        isAuthenticated: false,
+        user: {
+            phoneNumber: ''
+        }
     }
 })
 export class UserState {
 
-    constructor(
-    ) {
-
+    constructor() {
     }
 
     @Action(Login)
-    setLocales({getState, patchState}: StateContext<any>, { payload }: Login) {
-        const state: any = getState();
+    login({patchState}: StateContext<any>, {payload}: Login) {
+        patchState({
+            isAuthenticated: true,
+            user: {
+                phoneNumber: payload.phoneNumber
+            }
+        });
+    }
 
-        patchState({});
+    @Action(Logout)
+    logout({patchState}: StateContext<any>) {
+        patchState({
+            isAuthenticated: false,
+            user: {
+                phoneNumber: ''
+            }
+        });
     }
 }

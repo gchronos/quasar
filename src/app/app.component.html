@@ -1,3 +1,6 @@
-<quasar-header></quasar-header>
+<quasar-header *ngIf="isAuthenticated"></quasar-header>
+
+<div [class.loggedInPadding]="isAuthenticated"></div>
 
 <router-outlet></router-outlet>
+
