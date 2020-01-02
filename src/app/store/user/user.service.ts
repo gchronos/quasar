@@ -4,7 +4,8 @@ import {Select, Selector} from '@ngxs/store';
 import {Observable} from 'rxjs';
 
 import {UserData, UserStateData} from '@quasar/store/user/user.model';
-import {Login} from '@quasar/store/user/user.actions';
+import {Login, Logout} from '@quasar/store/user/user.actions';
+import {UserState} from '@quasar/store/user/user.state';
 
 
 @Injectable({providedIn: 'root'})
@@ -13,13 +14,12 @@ export class UserService {
     @Select(state => state.user)
     public user$: Observable<UserStateData>;
 
-    @Selector()
+    @Selector([UserState])
     static user(state: UserStateData): UserData {
-        console.log(state);
         return state.user;
     }
 
-    @Selector()
+    @Selector([UserState])
     static isAuthenticated(state: UserStateData): boolean {
         return state.isAuthenticated;
     }
@@ -27,5 +27,10 @@ export class UserService {
     @Dispatch()
     public login(payload: any) {
         return new Login(payload);
+    }
+
+    @Dispatch()
+    public logOut() {
+        return new Logout();
     }
 }

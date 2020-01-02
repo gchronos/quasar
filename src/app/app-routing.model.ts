@@ -1,10 +1,10 @@
 export enum LangRoutePages {
-    home = '',
+    home = 'home',
     login = 'login',
 }
 
 export enum HtmlRoutePages {
-    home = '/',
+    home = '/home',
     login = '/login',
 }
 

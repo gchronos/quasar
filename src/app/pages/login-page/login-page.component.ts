@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { getUserLocale } from 'get-user-locale';
 import * as firebaseui from 'firebaseui';
 import {firebase} from '@firebase/app';
 
 import {UserService} from '@quasar/store/user/user.service';
+
 
 @Component({
     selector: 'quasar-login-page',
@@ -19,13 +21,20 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
     ngOnInit() {
     }
 
-    ngAfterViewInit() {
+    async ngAfterViewInit() {
         const uiConfig = {
-            signInSuccessUrl: '<url-to-redirect-to-on-success>',
             signInOptions: [
-                // @ts-ignore
-                firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                {
+                    // @ts-ignore
+                    provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                    defaultCountry: getUserLocale()
+                }
             ],
+            callbacks: {
+                signInSuccessWithAuthResult: () => {
+                    return false;
+                }
+            }
         };
 
         // Initialize the FirebaseUI Widget using Firebase.

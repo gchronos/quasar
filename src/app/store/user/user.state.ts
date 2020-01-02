@@ -1,7 +1,10 @@
 import {Action, State, StateContext} from '@ngxs/store';
+import {firebase} from '@firebase/app';
+import {Router} from '@angular/router';
 
 import {Login, Logout} from '@quasar/store/user/user.actions';
 import {UserStateData} from '@quasar/store/user/user.model';
+import {LangRoutePages} from '@quasar/app-routing.model';
 
 
 @State<UserStateData>({
@@ -15,11 +18,16 @@ import {UserStateData} from '@quasar/store/user/user.model';
 })
 export class UserState {
 
-    constructor() {
+    constructor(
+        private router: Router
+    ) {
     }
 
     @Action(Login)
     login({patchState}: StateContext<any>, {payload}: Login) {
+        this.router.navigate([LangRoutePages.home]);
+
+        // @ts-ignore
         patchState({
             isAuthenticated: true,
             user: {
@@ -29,7 +37,11 @@ export class UserState {
     }
 
     @Action(Logout)
-    logout({patchState}: StateContext<any>) {
+    async logout({patchState}: StateContext<any>) {
+        // @ts-ignore
+        await firebase.auth().signOut();
+        await this.router.navigate([LangRoutePages.login]);
+
         patchState({
             isAuthenticated: false,
             user: {

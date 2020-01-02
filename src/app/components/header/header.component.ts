@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {UserService} from '@quasar/store/user/user.service';
+
 
 @Component({
-  selector: 'quasar-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'quasar-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+    constructor(
+        private userService: UserService,
+    ) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
+    onLogout() {
+        this.userService.logOut();
+    }
 }
